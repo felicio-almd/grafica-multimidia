@@ -30,7 +30,7 @@ void draw() {
   
   // barra de espaço vermelha
   fill(255, 0, 0);
-  rect(325, 695, 350, 80, radius, radius, radius, radius); 
+  rect(320, 695, 350, 80, radius, radius, radius, radius); 
 
   textAlign(CENTER, CENTER);
   textSize(24);
@@ -38,9 +38,9 @@ void draw() {
 
   if (digitosAtivo) {
     for (int i = 0; i < 10; i++) {
-      float x = 240 + i * 55;
+      float x = 250 + i * 55;
       float y = 560;
-      ellipse(x, y, 40, 40);
+      ellipse(x, y, 45, 46);
       fill(0);
       text(str(i), x, y);
       fill(200);
@@ -49,9 +49,9 @@ void draw() {
   
   if (textoAtivo) {
     for (int i = 0; i < 10; i++) {
-      float x = 240 + i * 55;
+      float x = 250 + i * 55;
       float y = 630;
-      ellipse(x, y, 40, 40);
+      ellipse(x, y, 45, 45);
       fill(0);
       text(letras[i], x, y);
       fill(200);
@@ -59,9 +59,9 @@ void draw() {
   }
 
   // botões de ativação 
-  desenharBotao(360, 710, 80, 50, "ON/OFF", onOffAtivo);
-  desenharBotao(470, 710, 80, 50, "DIG", digitosAtivo);
-  desenharBotao(580, 710, 80, 50, "TEXT", textoAtivo);
+  desenharBotao(350, 710, 80, 50, "ON/OFF", onOffAtivo);
+  desenharBotao(455, 710, 80, 50, "DIG", digitosAtivo);
+  desenharBotao(559, 710, 80, 50, "TEXT", textoAtivo);
 }
 
 void mousePressed() {
@@ -124,5 +124,3 @@ void gerarLetrasAleatorias() {
     letras[i] = alfabeto.charAt(int(random(alfabeto.length())));
   }
 }
-
-
