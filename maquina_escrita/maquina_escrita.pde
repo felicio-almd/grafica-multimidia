@@ -25,11 +25,11 @@ void draw() {
   rect(150, 500, 700, 325, 0, 0, radius, radius);  
 
   // fundo das teclas
-  fill(0, 0, 0);
+  fill(105, 105, 105);
   rect(200, 500, 600, 290, 0, 0, radius, radius); 
   
   // barra de espaço vermelha
-  fill(255, 0, 0);
+  fill(255, 190, 0);
   rect(320, 695, 350, 80, radius, radius, radius, radius); 
 
   textAlign(CENTER, CENTER);
@@ -102,7 +102,7 @@ void keyPressed() {
 }
 
 void desenharBotao(float x, float y, float w, float h, String label, boolean ativo) {
-  if (ativo) fill(0, 255, 0); 
+  if (ativo) fill(202, 204, 106); 
   else fill(255); 
   stroke(0);
   rect(x, y, w, h, 10);
