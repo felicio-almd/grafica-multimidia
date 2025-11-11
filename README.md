@@ -11,3 +11,11 @@ https://docs.google.com/document/d/1LvWJgOghLzZns3RtC42vuuN3UElpYeHi58UY5px_JEE/
 <img width="697" height="631" alt="image" src="https://github.com/user-attachments/assets/1a146a7f-b426-4293-86a8-200194383ad5" />
 
 <img width="684" height="816" alt="image" src="https://github.com/user-attachments/assets/7801cfe9-ce07-4b85-b794-3169b9aded6d" />
+
+
+### TODO 
+Fazer sair sons das teclas
+Quebra de linha no texto que aparece no papel
+Aumentar espaçamento de linhas no papel
+Consertar o texto
+Boca do robô
