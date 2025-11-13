@@ -15,7 +15,11 @@ https://docs.google.com/document/d/1LvWJgOghLzZns3RtC42vuuN3UElpYeHi58UY5px_JEE/
 
 ### TODO 
 Fazer sair sons das teclas
+
 Quebra de linha no texto que aparece no papel
-Aumentar espaçamento de linhas no papel
-Consertar o texto
+
+Aumentar espaçamento de linhas no papel, quebrar linha após 10 caracteres
+
+Consertar o texto: apagar quando desligar a máquina e ficar no lugar correto
+
 Boca do robô
