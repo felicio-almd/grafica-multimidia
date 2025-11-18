@@ -10,13 +10,14 @@ float eyeY;
 // Tamanho do olho
 float eyeSize = 100;
 // Deslocamento da pupila em relação ao centro do olho
-float pupilOffset =  6;
+float pupilOffset = 6;
 
 
 char[] letras = {'q', 'w', 'e', 'r', 'a', 'y', 'u', 'i', 'l', 'p'};
 String texto = "";
 int index = 0;
 boolean textoPressionado = false;
+
 void setup() {
   eyeX = width / 2;
   eyeY = height / 2;
@@ -29,9 +30,10 @@ void draw() {
   float radius = 20;
   background(255);
 
-  fill(255, 250, 240); // cor de papel
+  // PAPEL
+  fill(255, 250, 240); 
   stroke(180);
-  rect(180, 25, 640, 370, 10);  // papel acima do robô
+  rect(180, 25, 640, 370, 10);  
 
   // Linhas do papel
   stroke(220);
@@ -39,9 +41,11 @@ void draw() {
     float yLinha = 78 + i * 50;
     line(200, yLinha, 780, yLinha);
   }
+  
   fill(0);
   textSize(45); 
 
+  // Lógica de desenho do texto no papel
   for (int i = 0; i < texto.length(); i++) {
     char letra = texto.charAt(i);
     
@@ -55,51 +59,54 @@ void draw() {
       text(letra, x, y); 
     }
   }
-  // parte superior
+
+ 
+
+  // Pescoço
+  stroke(0);
+  fill(0);
+  rect(415, 430, 155 ,68, 50); 
+
+  // Parte superior da cabeça
   fill(255, 204, 0);
   noStroke();
   rect(150, 370, 700, 258, radius, radius, 0, 0);  
 
-
-  // parte inferior
+  // Parte inferior
   fill(255, 210, 0);
   stroke(0);
   rect(150, 565, 700, 380, 0, 0, radius, radius);  
 
-  // fundo das teclas
+  // Fundo das teclas (Cinza)
   fill(105, 105, 105);
   rect(200, 600, 600, 300, 0, 0, radius, radius); 
 
-  // barra de espaço vermelha
+  // Barra de espaço
   fill(255, 190, 0);
   rect(320, 790, 350, 80, radius, radius, radius, radius); 
 
-
-  //robô
-  // para facilitar o movimento do robô
-  float roboX = 174; // Posição X do robô
-  float roboY = 470; // Posição Y do robô
+  // DETALHES DO ROBÔ
+  float roboX = 174; 
+  float roboY = 570; 
 
   //pupila que mexe
-  // Calcula o ângulo entre o centro do olho e a posição do mouse
   float angle = atan2(mouseY - eyeY, mouseX - eyeX);
 
-  // Calcula a posição da pupila com base no ângulo
-  float pupilX = roboX + 363 + cos(angle) * pupilOffset;
-  float pupilY = roboY - 102 + sin(angle) * pupilOffset;
-  float pupilEX = roboX + 282 + cos(angle) * pupilOffset;
-  float pupilEY = roboY - 102 + sin(angle) * pupilOffset;
+  float pupilX = roboX + 361 + cos(angle) * pupilOffset;
+  float pupilY = roboY - 104 + sin(angle) * pupilOffset;
+  float pupilEX = roboX + 278 + cos(angle) * pupilOffset;
+  float pupilEY = roboY - 103 + sin(angle) * pupilOffset;
 
   beginShape();
   fill(104, 104, 104);
-  vertex(roboX + 204, roboY - 161);  // Ponto superior esquerdo
+  vertex(roboX + 204, roboY - 161);  
 
-  bezierVertex(roboX + (247 + 377), roboY - 272, 
-    roboX + (171 + 70 + 69), roboY - 161, 
-    roboX + 205 + 227, roboY - 169);  // Curva suave
+  bezierVertex(roboX + (231 + 312), roboY - 272, 
+    roboX + (163 + 70 + 69), roboY - 161, 
+    roboX + 205 + 227, roboY - 169); 
 
-  vertex(roboX + (208 + 220), roboY + 14);
-  vertex(roboX + 211, roboY + 13); // Ponto inferior esquerdo
+  vertex(roboX + (207 + 220), roboY + 14);
+  vertex(roboX + 211, roboY + 13); 
   endShape(CLOSE);
 
   // Lado esquerdo
@@ -118,29 +125,46 @@ void draw() {
   vertex(roboX + 374, roboY + 56); 
   endShape(CLOSE);
 
-  // Meio
-  fill(104);
-  
-  if (onOffAtivo) {
-    if (digitosAtivo || textoAtivo) {
-      rect(roboX + 262, roboY + 10, 113, 44);
-      fill(255, 204, 0);
-      
-      arc(roboX + 320, roboY + -2, 60, 40, 0, PI);
-    } else {
-      fill(255, 0, 0);
-      rect(roboX + 262, roboY + -1, 113, 56);
-    }
-  } else {
-    rect(roboX + 262, roboY + -1, 113, 56);
-    fill(18);
-  }
+  // BOCA E LUZES (MEIO) 
+  fill(60); 
+  stroke(0);
+  rect(roboX + 262, roboY + -10, 113, 66, 5); // Moldura da boca
 
+  if (onOffAtivo) {
+    fill(255, 204, 0);
+    noStroke(); 
+    if (textoAtivo || digitosAtivo) {
+       
+       // BOCA FELIZ (Sorriso) 
+       arc(roboX + 318, roboY + 16, 70, 51, 0, PI, CHORD);
+       
+       // Luzinha vermelha (LED) acesa indicando operação
+       fill(255, 100, 100); 
+       ellipse(roboX + 390, roboY + 22, 8, 8); 
+       
+    } else {
+       
+       // BOCA SÉRIA 
+       rect(roboX + 272, roboY + 18, 93, 14, 4);
+       
+       fill(150, 0, 0); 
+       ellipse(roboX + 390, roboY + 22, 8, 8); 
+    }
+    
+  } else {
+    fill(30);
+    rect(roboX + 272, roboY + 20, 93, 10);
+  }
+  
+  stroke(0);
+  
+  // capa do olho
   stroke(0);
   fill(0);
-  rect(415, 330, 155 ,68, 50);
+  rect(415, 433, 160 ,65, 50);
 
   // Olhos
+  stroke(0);
   if (onOffAtivo) {
     if (digitosAtivo || textoAtivo) {
       fill(255, 204, 0);
@@ -148,38 +172,37 @@ void draw() {
       fill(255, 0, 0);
     }
   } else {
-    fill(18);
+    fill(53);
   }
   ellipse(roboX + 361, roboY - 104, 46, 47);
   ellipse(roboX + 277, roboY - 102, 46, 47);
 
   //Pupilas
   if (onOffAtivo && (digitosAtivo || textoAtivo)) {
-    fill(255, 204, 0);
+    fill(0, 0, 0);
     ellipse(pupilX, pupilY, 80 * 0.4, 75 * 0.4);
     ellipse(pupilEX, pupilEY, 80 * 0.4, 75 * 0.4);
   }
 
-
-
   // Parafuso esquerdo
   fill(104, 104, 104);
   beginShape();
-  vertex(roboX + 179, roboY - 60);  // Ponto superior esquerdo
-  vertex(roboX + (157 + 50), roboY - 69);  // Ponto superior direito
-  vertex(roboX + (159 + 49), roboY - (39));  // Ponto inferior direito
-  vertex(roboX + 180, roboY - (39));  // Ponto inferior esquerdo
-  endShape(CLOSE);  // Fecha o retângulo
+  vertex(roboX + 179, roboY - 60); 
+  vertex(roboX + (157 + 50), roboY - 69); 
+  vertex(roboX + (159 + 49), roboY - (39)); 
+  vertex(roboX + 180, roboY - (39)); 
+  endShape(CLOSE); 
 
   // Parafuso direito
   beginShape();
-  vertex(roboX + 431, roboY - 69);  // Ponto superior esquerdo
-  vertex(roboX + (407 + 50), roboY - 60);  // Ponto superior direito
-  vertex(roboX + (407 + 50), roboY - (39));  // Ponto inferior direito
-  vertex(roboX + 431, roboY - (38));  // Ponto inferior esquerdo
-  endShape(CLOSE);  // Fecha o retângulo
-  // -- - - - fim do robô  - - - - - -
+  vertex(roboX + 431, roboY - 69); 
+  vertex(roboX + (407 + 50), roboY - 60); 
+  vertex(roboX + (407 + 50), roboY - (39)); 
+  vertex(roboX + 431, roboY - (38)); 
+  endShape(CLOSE); 
   
+  
+  // TECLAS E BOTÕES
   
   textAlign(CENTER, CENTER);
   textSize(24);
@@ -197,9 +220,8 @@ void draw() {
      if((mousePressed && scaledDistance <= 1) || (keyPressed && Character.getNumericValue(key) == i)){
         fill(139, 101, 94);
         
-        // Lógica de Adição do Dígito (NOVO)
         if (textoPressionado) {
-            texto += digito; // Adiciona o dígito à string de texto
+            texto += digito;
             textoPressionado = false;
         }
       }
@@ -235,7 +257,6 @@ void draw() {
       
   }
 
-  // botões de ativação 
   desenharBotao(350, 805, 80, 50, "ON/OFF", onOffAtivo);
   desenharBotao(455, 805, 80, 50, "DIG", digitosAtivo);
   desenharBotao(559, 805, 80, 50, "TEXT", textoAtivo);
@@ -246,7 +267,6 @@ void mousePressed() {
   if (mouseDentro(360, 805, 80, 50)) {
     onOffAtivo = !onOffAtivo;
     somTecla.play();
-    // se desligar, apaga tudo
     if (!onOffAtivo) {
       digitosAtivo = false;
       textoAtivo = false;
@@ -304,9 +324,6 @@ void desenharBotao(float x, float y, float w, float h, String label, boolean ati
 boolean mouseDentro(float x, float y, float w, float h) {
   return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
 }
-
-
-
 
 void escrever(String a, float x, float y){
   fill(0);
